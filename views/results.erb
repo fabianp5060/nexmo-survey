@@ -1,0 +1,22 @@
+<div class="Vlt-table" align="center">
+  <table>
+    <thead>  
+      <tr>
+        <th>Phone Number</th>
+        <th>Question 1</th>
+        <th>Question 2</th>
+        <th>Question 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @results.each do |caller| %>
+      <tr>
+        <td><%=caller.attributes[:phone_number]%></td>
+        <td><%=caller.attributes[:question_1]%></td>
+        <td><%=caller.attributes[:question_2]%></td>
+        <td><%=caller.attributes[:question_3]%></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

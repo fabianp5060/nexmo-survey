@@ -1,0 +1,77 @@
+.Vlt-box {
+	background: $grey-lighter;
+	border: 1px solid $grey-light;
+	border-radius: 8px;
+	margin-bottom: $unit2;
+	padding: $unit4;
+	text-align: left;
+	width: 100%;
+
+	.Vlt-btn {
+		margin-bottom: 0;
+	}
+
+	h2,
+	h3,
+	h4 {
+		margin-bottom: $unit1;
+		margin-top: 0;
+	}
+
+	&__data {
+		color: $black;
+		font-size: 36px;
+		font-weight: 900;
+
+		&--good {
+			color: $green;
+		}
+
+		&--bad {
+			color: $red;
+		}
+
+		&--average {
+			color: $yellow;
+		}
+	}
+
+	&__data-desc {
+		color: $grey-darker;
+		display: block;
+		margin-top: $unit1;
+	}
+
+	&--data {
+		padding: $unit2;
+		text-align: center;
+
+		h2,
+		h3,
+		h4 {
+			color: $grey-darker;
+			font-size: 2rem;
+			line-height: 2rem;
+			margin-bottom: $unit1;
+		}
+	}
+
+	&--fancy {
+		text-align: center;
+
+		img {
+			margin-bottom: $unit2;
+			max-height: 100px;
+			max-width: 100px;
+		}
+
+		p {
+			color: $grey-darker;
+			margin: 0;
+
+			& + p {
+				margin-top: $unit1;
+			}
+		}
+	}
+}

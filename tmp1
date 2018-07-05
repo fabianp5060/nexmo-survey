@@ -1,0 +1,14 @@
+    content_type :json
+    return [
+        {
+            "action": "talk",
+            "text": $questions[1],
+        },
+        {
+            "action": "input",
+            "submitOnHash": true,
+            "maxDigits": 1,
+            "timeOut": 10,
+            "eventUrl": ["#{$web_server}/event_ivr"]
+        }
+    ].to_json
