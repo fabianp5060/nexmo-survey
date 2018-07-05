@@ -5,7 +5,6 @@ STDOUT.sync = true
 require 'sinatra'
 require 'json'
 require 'dm-core'
-require 'dm-types'
 require 'dm-migrations'
 require 'nexmo'
 require 'logger'
@@ -36,6 +35,7 @@ end
 ##ADMIN WEBSITE
 get '/results' do
 	@results = Db.all
+	@title = $did
 	erb :results
 end
 	
