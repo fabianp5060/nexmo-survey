@@ -40,6 +40,8 @@ get '/results' do
 end
 	
 
+# AWS Health Check
+	get '/' do; 200; end
 
 # Answer URLs
 post '/event' do
