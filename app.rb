@@ -25,8 +25,8 @@ def update_webserver(app_id,web_server,app_name)
 		{
 			type: "voice",
 			name: app_name,
-			answer_url: "#{$web_server}/answer_home", 
-			event_url: "#{$web_server}/event_home"
+			answer_url: "#{$web_server}/answer_survey", 
+			event_url: "#{$web_server}/event_survey"
 		}
 	)
 	puts "Updated nexmo application name:\n  #{application.name}\nwith webhooks:\n  #{application.voice.webhooks[0].endpoint}\n  #{application.voice.webhooks[1].endpoint}"
@@ -41,16 +41,16 @@ end
 	
 
 # AWS Health Check
-	get '/' do; 200; end
+get '/' do; 200; end
 
 # Answer URLs
-post '/event' do
+post '/event_survey' do
 	request_payload = JSON.parse(request.body.read)
 	puts "#{__method__} | --\n#{request_payload}\n--"
 	status 200
 end
 
-get '/answer' do 
+get '/answer_survey' do 
 	puts "#{__method__} | Make sure Things are working PARAMS | #{params}"
 	db = Db.first_or_create(
 		phone_number: params['from'],
