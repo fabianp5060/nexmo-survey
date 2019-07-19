@@ -25,11 +25,11 @@ def update_webserver(app_id,web_server,app_name)
 		{
 			type: "voice",
 			name: app_name,
-			answer_url: "#{$web_server}/answer", 
-			event_url: "#{$web_server}/event"
+			answer_url: "#{$web_server}/answer_home", 
+			event_url: "#{$web_server}/event_home"
 		}
 	)
-	puts "Updated Application: #{application.inspect}" 
+	puts "Updated nexmo application name:\n  #{application.name}\nwith webhooks:\n  #{application.voice.webhooks[0].endpoint}\n  #{application.voice.webhooks[1].endpoint}"
 end
 
 ##ADMIN WEBSITE
@@ -211,7 +211,7 @@ app_key = ENV['NEXMO_APPLICATION_PRIVATE_KEY_PATH']
 app_name = ENV['SURVEY_APP_NAME']
 app_id = ENV['SURVEY_APP_ID']
 $did = ENV['MY_NEXMO_DID']
-$web_server = ENV['WEB_SERVER'] ? ENV['WEB_SERVER'] : "https://c1f8f5a2.ngrok.io"
+$web_server = ENV['SURVEY_WEB_URL'] || JSON.parse(Net::HTTP.get(URI('http://127.0.0.1:4040/api/tunnels')))['tunnels'][0]['public_url']
 $questions = [
 	"to lazy to offset everything by 1",
 	"On a scale of 1 to 5, with 1 being the worst and 5 being the best, How satisfied where you with your most recent visit?",
