@@ -1,53 +1,176 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <link rel="stylesheet" type="text/css"  href="/assets/css/volta.css">
-    <link rel="icon" type="image/ico" href="favicon.png">
-  </head>
-
-  <body class="area--components section--navigation page--tabs Vlt-body--has-sidenav">
-    <header class="main-header">
-      <div class="main-header__logo">
-        <a href="/customer" class="Vlt-M-plus">
-          <img width="221" height="47" src="/assets/images/VONAGE_P_CMYK.jpg">
-        </a>
-        <a href="/customer" class="Vlt-S-only">
-          <img width="40" height="150" align="center" src="/assets/images/Vonage_Symbol.png">
-        </a>
-      </div>
-
-    </header>
-    <div class="Vlt-grid">
-      <div class=Vlt-col>
-        <div class=Vlt-col>
-          <div class=Vlt-col>
-            <div class=Vlt-col> 
-              <div class=Vlt-col>
-                <div class=Vlt-col>
-                  <div class=Vlt-col>
-                    <div class=Vlt-col>    
-                      <main class="main-content Vlt-article">  
-
-                        <h3><center><%= @title %></center></h3>
-                        <%= yield %>
-                      </main>   
-                   </div>
+<html lang="en" itemscope itemtype="http://schema.org/Article">
+    <head>
+      <!-- Volta CSS Stuff -->
+      <link rel="icon" type="image/ico" href="https://d2gl3otkt8l7qr.cloudfront.net/favicon.png">
+    <link rel="stylesheet" href="https://d2gl3otkt8l7qr.cloudfront.net/assets/1.2/dist/css/volta.css">
+    <!-- Okta widget stuff -->
+    <script src="https://ok1static.oktacdn.com/assets/js/sdk/okta-auth-js/2.0.1/okta-auth-js.min.js"></script>
+    </head>
+  <body>
+    <div class="Vlt-margin--top3 Vlt-margin--M-top2 Vlt-margin--S-top1">
+      <div class="Vlt-col">
+        <header class="Vlt-header">
+          <div class="Vlt-grid">
+            <div class="Vlt-col">
+              <div class="Vlt-grid">
+                <div class="Vlt-col Vlt-col--1of2">
+                  <div class="Vlt-header__logo">
+                    <a href="/user" >
+                      <img src="https://www.vonage.com/assets/images/logo-vonage.svg#volta">
+                    </a>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="Vlt-col Vlt-col--1of4">
+            </div>
+            <div class="Vlt-col Vlt-col--4of4 Vlt-right">
+            </div>        
           </div>
-        </div>
+      </header>
       </div>
+      <p></p>
+      <p></p>
+    <div class="Vlt-grid">
+      <div class="Vlt-col">
+      </div>
+      <div class="Vlt-col">
+      </div>
+      <div class="Vlt-col">
+      </div>
+      <div class="Vlt-col">
+      </div>
+      <div class="Vlt-grid__separator"><!-- Empty line breaker --></div>
+      <div class="Vlt-col">       
+      </div>
+      <div class="Vlt-col Vlt-col--3of4">
+        <%= yield %>
+      </div>
+      <div class="Vlt-col">       
+      </div>        
     </div>
-    
+    </div>
+
+<!--    <script>
+      function loadInfo(email,token){
+        console.log("Made it here");
+        console.log("Found email: " + email);
+        console.log("Found token: " + token);
+        document.getElementById('auth_email_address').innerHTML = email;
+        document.getElementById("auth_token").innerHTML = token;
+
+      }
+
+      var oktaSignIn = new OktaSignIn({
+        baseUrl: "https://dev-729731.okta.com",
+        clientId: "0oawl0b18azKfOpTG356",
+        redirectUri: "https://fabianp5060.github.io",
+        authParams: {
+          issuer: "https://dev-729731.okta.com/oauth2/default",
+          responseType: ['token', 'id_token'],
+          display: 'page'
+        }
+      });
+
+      if (oktaSignIn.token.hasTokensInUrl()) {
+        console.log("Found token in Url")
+        oktaSignIn.token.parseTokensFromUrl(
+          // If we get here, the user just logged in.
+          function success(res) {
+            var accessToken = res[0];
+            var idToken = res[1]
+
+            oktaSignIn.tokenManager.add('accessToken', accessToken);
+            oktaSignIn.tokenManager.add('idToken', idToken);
+
+            window.location.hash='';
+
+            // Setup pageview for logged in user
+        var email_address = idToken.claims.email;
+        var token = accessToken;        
+        loadInfo(email,token);
+          },
+          function error(err) {
+            console.error(err);
+          }
+        );
+      } else {
+        oktaSignIn.session.get(function (res) {
+          console.log("Checking session for token");
+          // If we get here, the user is already signed in.
+          if (res.status === 'ACTIVE') {            
+        console.log("Found token in session " + oktaSignIn.tokenManager.get('idToken'));
+            
+            // var email =  oktaSignIn.tokenManager.get('idToken').claims.email;
+            // var token = oktaSignIn.tokenManager.get('accessToken');
 
 
-  <script type="text/javascript" src="../assets/js/volta.js"></script>
-<!--   <script type="text/javascript" src="assets/js/popper.min.js"></script>
-  <script type="text/javascript" src="assets/js/tooltip.min.js"></script> -->
-  <script type="text/javascript">
-      Volta.init(['accordion', 'modal', 'tooltip', 'callout', 'dropdown', 'tab', 'menu', 'menuCollapse']);
-  </script>    
-  </body>
+          loadInfo(email,token);
+
+            return;
+          } else {
+              console.log("Not logged in apparently")
+              // This means that the user is not logged in
+              document.getElementById("status").innerHTML = "I am not logged in";             
+            console.log("Didi not find accesstoke");
+            oktaSignIn.renderEl(
+              { el: '#okta-login-container' },
+              function success(res) {},
+              function error(err) {
+                console.error(err);
+              }
+            );                    
+          }       
+        });
+      }
+    </script> -->
+      <script>
+      function loadInfo(email){
+        document.getElementById('auth_email_address').innerHTML = email;
+      }
+
+        // Bootstrap the AuthJS Client
+        console.log("My redirect: " + "<%= $okta_redirect %>")
+        var authClient = new OktaAuth({
+          url: 'https://dev-729731.okta.com',
+          clientId: '0oawl0b18azKfOpTG356',
+          redirectUri: "<%= $okta_redirect %>"
+        });
+        // Attempt to retrieve ID Token from Token Manager
+        var idToken = authClient.tokenManager.get('idToken')
+        .then(idToken => {
+          // If ID Token exists, output it to the console
+          if (idToken) {  
+            var email = idToken.claims.email;
+            // var phone = idToken.claims.phone;
+            loadInfo(email);          
+            console.log(`hi ${idToken.claims.email}!`);
+          // If ID Token isn't found, try to parse it from the current URL
+          }
+          else if (location.hash) {
+            authClient.token.parseFromUrl()
+            .then(idToken => {
+              console.log(`hi ${idToken.claims.email}!`);
+              var email = idToken.claims.email;
+              loadInfo(email);
+              // Store parsed token in Token Manager
+              authClient.tokenManager.add('idToken', idToken);
+              console.log(idToken);
+            });
+          }
+          else {
+            // You're not logged in, you need a sessionToken
+            authClient.token.getWithRedirect({
+              responseType: 'id_token'
+            });
+          }
+        });
+      </script>   
+    <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/assets-petesweb.io/assets/1.2/js/svgxuse.min.js"></script>
+    <script type="text/javascript" src="https://s3-us-west-2.amazonaws.com/assets-petesweb.io/assets/1.2/dist/js/volta.min.js"/> 
+    <script type="text/javascript">
+      Volta.init();
+    </script> 
+    </body>
 </html>

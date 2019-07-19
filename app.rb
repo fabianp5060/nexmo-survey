@@ -20,6 +20,7 @@ puts "Cleard DB on start: #{Db.destroy}"
 # Update with ngrok/aws web server address
 def update_webserver(app_id,web_server,app_name)
 	puts "My vars: ID: #{app_id}, WS: #{web_server}, NAME: #{app_name}"
+	$okta_redirect = "#{$web_server}/results"
 	application = $client.applications.update(
 		app_id,
 		{
